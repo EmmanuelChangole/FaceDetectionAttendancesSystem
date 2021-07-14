@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,300i,700"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="shortcut icon" type="image/png" href="static/img/favicon.png" />
+
+    <title>Attendances</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav nav--tours">
+        <a href="#" class="nav__el">All units</a>
+        <form class="nav__search">
+          <button class="nav__search-btn">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-search"></use>
+            </svg>
+          </button>
+          <input
+            type="text"
+            placeholder="Search unit"
+            class="nav__search-input"
+          />
+        </form>
+      </nav>
+
+
+      <nav class="nav nav--user">
+        <a href="#" class="nav__el">My bookings</a>
+        <a href="#" class="nav__el">
+
+          <span>{{username}}</span>
+        </a>
+
+
+
+      </nav>
+    </header>
+
+    <!-- <section class="overview"> -->
+    <main class="main">
+      <div class="card-container">
+         {% for course in courses %}
+        <div class="card">
+          <div class="text_content">
+          <h2>{{course['name']}}</h2>
+          <h3>{{course['course_code']}}</h3>
+          <input type="checkbox">
+          </div>
+          </div>
+         {% endfor %}
+        </div>
+
+      </div>
+    </main>
+
+    <div class="footer">
+      <div class="footer__logo">
+
+      </div>
+      <ul class="footer__nav">
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Download apps</a></li>
+        <li><a href="#">Become a guide</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <p class="footer__copyright">
+        &copy; by Emmanuel Changole All rights reserved.
+      </p>
+    </div>
+  </body>
+</html>
+

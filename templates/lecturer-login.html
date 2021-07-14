@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Title -->
+    <title>Login</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="public/img/favicon.ico">
+
+    <!-- Template -->
+    <link rel="stylesheet" href="static/public/graindashboard/css/graindashboard.css">
+  </head>
+
+  <body class="">
+
+    <main class="main">
+      <div class="content">
+			<div class="container-fluid pb-5">
+				<div class="row justify-content-md-center">
+					<div class="card-wrapper col-12 col-md-4 mt-5">
+						<div class="brand text-center mb-3">
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<h4 class="card-title">Lecturer Login</h4>
+								<form method=POST action="{{ url_for('lecturerLogin') }}">
+									<div class="form-group">
+										<label for="reg_number">Staff Number</label>
+										<input id="reg_number" type="reg_number" name="reg_number" class="form-control"  required="" autofocus="">
+									</div>
+
+									<div class="form-group">
+										<label for="password">Password
+										</label>
+										<input id="password" type="password" class="form-control" name="pass" required="">
+										<div class="text-right">
+											<a href="password-reset.html" class="small">
+												Forgot Your Password?
+											</a>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="form-check position-relative mb-2">
+										  <input type="checkbox" class="form-check-input d-none" id="remember" name="remember">
+										  <label class="checkbox checkbox-xxs form-check-label ml-1" for="remember"
+												 data-icon="&#xe936">Remember Me</label>
+										</div>
+									</div>
+
+									<div class="form-group no-margin">
+										 <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+									</div>
+
+								</form>
+							</div>
+						</div>
+						<footer class="footer mt-3">
+							<div class="container-fluid">
+								<div class="footer-content text-center small">
+									<span class="text-muted">&copy; 2021 Changole. All Rights Reserved.</span>
+								</div>
+							</div>
+						</footer>
+					</div>
+				</div>
+
+
+
+			</div>
+
+      </div>
+    </main>
+
+	<script src="static/public/graindashboard/js/graindashboard.js"></script>
+    <script src="static/public/graindashboard/js/graindashboard.vendor.js"></script>
+  </body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Title -->
+    <title>Registered unit</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="public/img/favicon.ico">
+
+    <!-- Template -->
+    <link rel="stylesheet" href="static/public/graindashboard/css/graindashboard.css">
+
+</head>
+
+<body class="has-sidebar has-fixed-sidebar-and-header">
+<!-- Header -->
+<header class="header bg-body">
+    <nav class="navbar flex-nowrap p-0">
+
+
+        <div class="header-content col px-md-3">
+            <div class="d-flex align-items-center">
+                <!-- Side Nav Toggle -->
+                <a  class="js-side-nav header-invoker d-flex mr-md-2" href="#"
+                    data-close-invoker="#sidebarClose"
+                    data-target="#sidebar"
+                    data-target-wrapper="body">
+                    <i class="gd-align-left"></i>
+                </a>
+                <!-- End Side Nav Toggle -->
+
+                <!-- User Notifications -->
+                <div class="dropdown ml-auto">
+                    <a id="notificationsInvoker" class="header-invoker" href="#" aria-controls="notifications" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-target="#notifications" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-animation-in="fadeIn" data-unfold-animation-out="fadeOut">
+                        <span class="indicator indicator-bordered indicator-top-right indicator-primary rounded-circle"></span>
+                        <i class="gd-bell"></i>
+                    </a>
+
+                    <div id="notifications" class="dropdown-menu dropdown-menu-center py-0 mt-4 w-18_75rem w-md-22_5rem unfold-css-animation unfold-hidden" aria-labelledby="notificationsInvoker" style="animation-duration: 300ms;">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center border-bottom py-3">
+                                <h5 class="mb-0">Notifications</h5>
+                                <a class="link small ml-auto" href="#">Clear All</a>
+                            </div>
+
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush">
+                                    <div class="list-group-item list-group-item-action">
+                                        <div class="d-flex align-items-center text-nowrap mb-2">
+                                            <i class="gd-info-alt icon-text text-primary mr-2"></i>
+                                            <h6 class="font-weight-semi-bold mb-0">New Update</h6>
+                                            <span class="list-group-item-date text-muted ml-auto">just now</span>
+                                        </div>
+                                        <p class="mb-0">
+                                            Order <strong>#10000</strong> has been updated.
+                                        </p>
+                                        <a class="list-group-item-closer text-muted" href="#"><i class="gd-close"></i></a>
+                                    </div>
+                                    <div class="list-group-item list-group-item-action">
+                                        <div class="d-flex align-items-center text-nowrap mb-2">
+                                            <i class="gd-info-alt icon-text text-primary mr-2"></i>
+                                            <h6 class="font-weight-semi-bold mb-0">New Update</h6>
+                                            <span class="list-group-item-date text-muted ml-auto">just now</span>
+                                        </div>
+                                        <p class="mb-0">
+                                            Order <strong>#10001</strong> has been updated.
+                                        </p>
+                                        <a class="list-group-item-closer text-muted" href="#"><i class="gd-close"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End User Notifications -->
+                <!-- User Avatar -->
+                <div class="dropdown mx-3 dropdown ml-2">
+                    <a id="profileMenuInvoker" class="header-complex-invoker" href="#" aria-controls="profileMenu" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-target="#profileMenu" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-animation-in="fadeIn" data-unfold-animation-out="fadeOut">
+                        <span class="mr-md-2 avatar-placeholder">{{username[0]}}</span>
+                        <span class="d-none d-md-block">{{username}}</span>
+                        <i class="gd-angle-down d-none d-md-block ml-2"></i>
+                    </a>
+
+                    <ul id="profileMenu" class="unfold unfold-user unfold-light unfold-top unfold-centered position-absolute pt-2 pb-1 mt-4 unfold-css-animation unfold-hidden fadeOut" aria-labelledby="profileMenuInvoker" style="animation-duration: 300ms;">
+                        <li class="unfold-item">
+                            <a class="unfold-link d-flex align-items-center text-nowrap" href="#">
+                    <span class="unfold-item-icon mr-3">
+                      <i class="gd-user"></i>
+                    </span>
+                                My Profile
+                            </a>
+                        </li>
+                        <li class="unfold-item unfold-item-has-divider">
+                            <a class="unfold-link d-flex align-items-center text-nowrap" href="#">
+                    <span class="unfold-item-icon mr-3">
+                      <i class="gd-power-off"></i>
+                    </span>
+                                Sign Out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End User Avatar -->
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- End Header -->
+
+<main class="main">
+    <!-- Sidebar Nav -->
+    <aside id="sidebar" class="js-custom-scroll side-nav">
+        <ul id="sideNav" class="side-nav-menu side-nav-menu-top-level mb-0">
+            <!-- Title -->
+            <li class="sidebar-heading h6">Dashboard</li>
+            <!-- End Title -->
+
+            <!-- Dashboard -->
+            <li class="side-nav-menu-item">
+                <a class="side-nav-menu-link media align-items-center" href="{{ url_for('home') }}">
+              <span class="side-nav-menu-icon d-flex mr-3">
+                <i class="gd-dashboard"></i>
+              </span>
+                    <span class="side-nav-fadeout-on-closed media-body">Dashboard</span>
+                </a>
+            </li>
+            <!-- End Dashboard -->
+
+            <!-- Title -->
+            <li class="sidebar-heading h6">School</li>
+            <!-- End Title -->
+
+            <!-- Users -->
+            <li class="side-nav-menu-item side-nav-has-menu">
+                <a class="side-nav-menu-link media align-items-center" href="#"
+                   data-target="#subUsers">
+                  <span class="side-nav-menu-icon d-flex mr-3">
+                    <i class="gd-user"></i>
+                  </span>
+                    <span class="side-nav-fadeout-on-closed media-body">Users</span>
+                    <span class="side-nav-control-icon d-flex">
+                <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+              </span>
+                    <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+                </a>
+
+                <!-- Users: subUsers -->
+                <ul id="subUsers" class="side-nav-menu side-nav-menu-second-level mb-0">
+                    <li class="side-nav-menu-item ">
+                        <a class="side-nav-menu-link" href="{{ url_for('getStudents') }}">Update profile</a>
+                    </li>
+
+
+                </ul>
+                <!-- End Users: subUsers -->
+            </li>
+            <!-- End Users -->
+
+            <!-- Authentication -->
+          <li class="side-nav-menu-item side-nav-has-menu active side-nav-opened">
+                <a class="side-nav-menu-link media align-items-center" href="#"
+                   data-target="#subPages">
+              <span class="side-nav-menu-icon d-flex mr-3">
+                <i class="gd-book"></i>
+              </span>
+                    <span class="side-nav-fadeout-on-closed media-body">courses</span>
+                    <span class="side-nav-control-icon d-flex">
+                <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+              </span>
+                    <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+                </a>
+
+                <!-- Pages: subPages -->
+                <ul id="subPages" class="side-nav-menu side-nav-menu-second-level mb-0" style="display: block;" >
+                    <li class="side-nav-menu-item">
+                        <a class="side-nav-menu-link" href="{{url_for('registerUnit',id=id)}}">Register unit</a>
+                    </li>
+                    <li class="side-nav-menu-item">
+                        <a class="side-nav-menu-link active" href="{{url_for('getRegisteredUnit')}}">View registered unit</a>
+                    </li>
+
+                </ul>
+                <!-- End Pages: subPages -->
+            </li>
+            <!-- End Authentication -->
+
+            <!-- Settings -->
+            <li class="side-nav-menu-item">
+                <a class="side-nav-menu-link media align-items-center" href="settings.html">
+              <span class="side-nav-menu-icon d-flex mr-3">
+                <i class="gd-settings"></i>
+              </span>
+                    <span class="side-nav-fadeout-on-closed media-body">Settings</span>
+                </a>
+            </li>
+            <!-- End Settings -->
+
+
+        </ul>
+    </aside>
+    <!-- End Sidebar Nav -->
+
+    <div class="content">
+        <div class="py-4 px-4 px-md-4">
+            <div class="card mb-3 mb-md-4">
+                <div class="card-body">
+                    <!-- Breadcrumb -->
+                    <nav class="d-none d-md-block" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="#">Courses</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Register unit</li>
+                        </ol>
+                    </nav>
+                    <!-- End Breadcrumb -->
+                    <div class="alert-background-error">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %}
+                  {% for category, message in messages %}
+               <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                <span class="span_text">{{ message }}</span>
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true" class="span_text">×</span>
+                </button>
+            </div>
+              {% endfor %}
+          {% endif %}
+         {% endwith %}
+                    </div>
+
+                    <div class="mb-3 mb-md-2 d-flex justify-content-between">
+                        <div class="h3 mb-0">Registered Units</div>
+                    </div>
+
+
+
+                        <input type="hidden" id="id" name="id" value="{{id}}">
+
+
+
+
+
+          <div class="table-responsive-xl">
+                        <table class="table text-nowrap mb-0">
+                            <thead>
+                            <tr>
+
+                                <th class="font-weight-semi-bold border-top-0 py-2">Course code</th>
+                                <th class="font-weight-semi-bold border-top-0 py-2">Description</th>
+                                <th class="font-weight-semi-bold border-top-0 py-2">Year</th>
+                                <th class="font-weight-semi-bold border-top-0 py-2">Semester</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {%for course in courses %}
+
+                            <tr>
+
+                                <td class="align-middle py-3">
+                                    <div class="d-flex align-items-center">
+                                       {{course['course_code']}}
+                                    </div>
+                                </td>
+                                <td class="py-3">{{course['description']}}</td>
+                                  <td class="py-3">{{course['year']}}</td>
+                                  <td class="py-3">{{course['semester']}}</td>
+                                <td class="py-3">
+                                    <div class="position-relative">
+                                        <a class="link-dark d-inline-block" href="dropCourse?course_id={{course['_id']}}&student_id={{id}}">
+                                            <i class="">Drop</i>
+                                        </a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            {%endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script src="static/public/graindashboard/js/graindashboard.js"></script>
+<script src="static/public/graindashboard/js/graindashboard.vendor.js"></script>
+
+</body>
+</html>
