@@ -18,6 +18,7 @@ mongo=PyMongo(app)
 grid_fs=gridfs.GridFS(mongo.db)
 ALLOWED_EXTENSIONS=set(['png','jpg','jpeg','gif'])
 num=0
+
 @app.route('/getCourse', methods=['POST','GET'])
 def getCourse():
  if 'role' in session:
@@ -702,6 +703,59 @@ def deleteCourse():
      return render_template('login.html')
 
 
+@app.route('/settings',methods=['POST','GET'])
+def settings():
+    if session.get('role'):
+        if session.get('role') == 'admin':
+           if request.method == 'GET':
+             return render_template('settings.html',username=session['username'])
+           else:
+             old_password=request.form.get("old_password")
+             password=request.form.get("password")
+             password_confirm=request.form.get("password_confirm")
+             if password == password_confirm:
+               username=session['username']
+               admin = mongo.db.admin.find_one({'name': username})
+               if admin:
+                   if bcrypt.hashpw(old_password.encode('utf-8'), admin['password']) == admin['password']:
+                       hashpass = bcrypt.hashpw(request.form.get("password").encode('utf-8'), bcrypt.gensalt())
+                       user_id=ObjectId(admin['_id'])
+                       mongo.db.admin.update({"_id": user_id}, {
+                           "$set": {'password': hashpass}})
+                       flash("You have successfully updated your password")
+                       return render_template('settings.html', username=session['username'],flag=True)
+                   else:
+                       flash( "Invalid Password")
+                       return render_template('settings.html', username=session['username'],flag=False)
+               else:
+                   flash( "Invalid Password")
+                   return render_template('settings.html', username=session['username'],flag=False)
+             else:
+                 flash("Password does not match")
+                 return render_template('settings.html', username=session['username'], flag=False)
+        else:
+            return render_template('lecturer-login.html')
+    else:
+        return render_template('lecturer-login.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        username=request.form['username']
+        password=request.form['pass']
+        admin = mongo.db.admin.find_one({'name': username})
+        if admin:
+            if bcrypt.hashpw(password.encode('utf-8'), admin['password']) == admin['password']:
+                session['role']='admin'
+                session['username']=username
+                return redirect(url_for('index'))
+            else:
+                error="Invalid Username and Password"
+        else:
+            error = "Invalid Username and Password"
+    return render_template('login.html',error=error)
+
 @app.route('/logout')
 def logout():
     session.clear()
@@ -1170,23 +1224,7 @@ def viewAttendance():
 
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    error = None
-    if request.method == 'POST':
-        username=request.form['username']
-        password=request.form['pass']
-        admin = mongo.db.admin.find_one({'name': username})
-        if admin:
-            if bcrypt.hashpw(password.encode('utf-8'), admin['password']) == admin['password']:
-                session['role']='admin'
-                session['username']=username
-                return redirect(url_for('index'))
-            else:
-                error="Invalid Username and Password"
-        else:
-            error = "Invalid Username and Password"
-    return render_template('login.html',error=error)
+
 @app.route('/',methods=['GET', 'POST'])
 def index():
     if 'role' in session:
@@ -1305,6 +1343,8 @@ def lecturerLogin():
                 session['username'] = name
                 return redirect(url_for('lecturerDashboard', id=lecturer['_id']))
     return render_template('lecturer-login.html')
+
+
 
 
 
