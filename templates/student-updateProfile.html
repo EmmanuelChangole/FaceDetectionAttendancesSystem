@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- Title -->
-    <title>Dashboard | Graindashboard UI Kit</title>
+    <title>Update Profile</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -132,8 +132,8 @@
             <!-- End Title -->
 
             <!-- Dashboard -->
-            <li class="side-nav-menu-item active">
-                <a class="side-nav-menu-link media align-items-center" href="/">
+            <li class="side-nav-menu-item">
+                <a class="side-nav-menu-link media align-items-center" href="{{url_for('dashBoard',id=id)}}">
               <span class="side-nav-menu-icon d-flex mr-3">
                 <i class="gd-dashboard"></i>
               </span>
@@ -162,9 +162,9 @@
                 </a>
 
                 <!-- Users: subUsers -->
-                <ul id="subUsers" class="side-nav-menu side-nav-menu-second-level mb-0">
+                <ul id="subUsers" class="side-nav-menu side-nav-menu-second-level mb-0" style="display: block;">
                     <li class="side-nav-menu-item">
-                        <a class="side-nav-menu-link" href="{{ url_for('updateProfile') }}">Update profile</a>
+                        <a class="side-nav-menu-link active" href="{{ url_for('updateProfile',id=id) }}">Update profile</a>
                     </li>
 
 
@@ -190,10 +190,10 @@
                 <!-- Pages: subPages -->
                 <ul id="subPages" class="side-nav-menu side-nav-menu-second-level mb-0">
                     <li class="side-nav-menu-item">
-                        <a class="side-nav-menu-link" href="{{url_for('registerUnit',id=id,name=username)}}">Register unit</a>
+                        <a class="side-nav-menu-link" href="{{url_for('registerUnit',id=id)}}">Register unit</a>
                     </li>
                     <li class="side-nav-menu-item">
-                        <a class="side-nav-menu-link" href="{{url_for('addCourse')}}">View Registered <unit></unit></a>
+                        <a class="side-nav-menu-link" href="{{url_for('getRegisteredUnit',id=id)}}">View Registered <unit></unit></a>
                     </li>
 
                 </ul>
@@ -239,7 +239,15 @@
                     </div>
 
           <div>
-              <form method=POST action="{{ url_for('updateProfile',id=id,username=username) }}" enctype="multipart/form-data">
+
+              {%if status == True %}
+               <img src="data:image/png;base64",{{img}} alt=""/>
+
+               {%endif %}
+
+
+
+              <form method=POST action="{{ url_for('updateProfile',id=id) }}" enctype="multipart/form-data">
                              <div class="form-row">
                                 <div class="form-group col-12 col-md-6">
                                    

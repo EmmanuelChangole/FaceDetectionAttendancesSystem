@@ -782,7 +782,7 @@ def registerUnit():
             for course in course_cursor:
                 courseList.append(course)
             print(courseList)
-            return render_template('register-unit.html',courses=courseList,username="manu",id=id)
+            return render_template('register-unit.html',courses=courseList,username=session['username'],id=id)
         else:
          flag=False
          error="You have already registered"
@@ -804,7 +804,7 @@ def registerUnit():
                  mongo.db.registered_units.insert({"student_id": student['_id'], 'unit_id': unit_id})
          if flag:
              flash(error)
-         return render_template('register-unit.html',username="manu",id=id)
+         return render_template('register-unit.html',username=session['username'],id=id)
 @app.route('/addUnitToTeach')
 def addUnitToTeach():
   if session.get('role'):
@@ -862,7 +862,7 @@ def getRegisteredUnit():
           for unit in units:
            course = mongo.db.course.find_one({'_id': unit['unit_id']})
            courses.append(course)
-          return render_template('registered-unit.html', id=id,courses=courses,username="")
+          return render_template('registered-unit.html', id=id,courses=courses,username=session['username'])
         elif role =='lecturer':
             courses = []
             units = mongo.db.unit_to_teach .find({'lecturer_id': id})
@@ -889,17 +889,16 @@ def allowed_file(filename):
 @app.route('/updateProfile', methods=['POST','GET'])
 def updateProfile():
     id = request.args.get('id')
-    name = request.args.get('username')
     if request.method =='GET':
-        return render_template('student-updateProfile.html',username=name,id=id)
+        return render_template('student-updateProfile.html',username=session['username'],id=id)
     else:
      if 'file' not in request.files:
          flash('no file part')
-         return render_template('student-updateProfile.html', username=name, id=id)
+         return render_template('student-updateProfile.html',username="", id=id)
      file=request.files['file']
      if file.filename=='':
          flash("no Image selected for uploading")
-         return render_template('student-updateProfile.html', username=name, id=id)
+         return render_template('student-updateProfile.html',username="", id=id)
      if file and allowed_file(file.filename):
          id=ObjectId(id)
          student = mongo.db.student.find_one({'_id': id})
@@ -910,7 +909,6 @@ def updateProfile():
            users=mongo.db.fs.files.find()
            for user in users:
             print(user)
-
 
          print("file found")
 
@@ -928,12 +926,20 @@ def updateProfile():
          img=base_64_data.decode('utf-8')
          print(img)
          #print(url_for('127.0.0.1:5000/file',image_file))
-         return f'''
-       <img src="data:image/png;base64",{{img}}" alt="myImage"/>
-        '''
+
+         #return render_template('student-updateProfile.html', username=session['username'], id=id,img=img,status=True)
+         return url_for('127.0.0.1:5000/file {{image_file}}')
+        # return f'''
+        # <img src="data:image/png;base64/{{img}}" alt="myImage">
+        #  '''
      else:
          flash("Please select a valid image file, allowed image are - png, jpg, jpeg, gif .")
-         return render_template('student-updateProfile.html', username=name, id=id)
+         return render_template('student-updateProfile.html', username=session['username'], id=id)
+
+
+@app.route('/file/<filename>')
+def file(filename):
+    return mongo.send_file(filename)
 
 @app.route('/getProfile',methods=['GET'])
 def getupdate():
@@ -1244,7 +1250,7 @@ def dashBoard():
             name=request.args.get('name')
             id=request.args.get('id')
 
-            return render_template('student-dash-board.html',username=name,id=id)
+            return render_template('student-dash-board.html',username=session['username'],id=id)
         else:
             return render_template('student-login.html')
 
@@ -1289,9 +1295,7 @@ def registerLecturer():
     return render_template('login.html')
 
 
-@app.route('/file/<filename>')
-def file(filename):
-    return mongo.send_file(filename)
+
 
 def findEncodings(images): #Function that Finds encoding on face
     encodingList=[]
@@ -1314,12 +1318,15 @@ def studentLogin():
         student = mongo.db.student.find_one({'reg': reg_number})
         if student:
             if bcrypt.hashpw(password.encode('utf-8'), student['password']) == student['password']:
+                session.clear()
                 session['role'] = 'student'
-                name=student['name']
-                name=str(name)
-                name=name.split()
-                name=name[0]
-                return redirect(url_for('dashBoard',id=student['_id'],name=name))
+                name = student['name']
+                name = str(name)
+                name = name.split()
+                name = name[0]
+                session['username']=name
+
+                return redirect(url_for('dashBoard',id=student['_id']))
     return render_template('student-login.html')
 
 @app.route('/lecturerLogin',methods=['POST','GET'])
@@ -1335,6 +1342,7 @@ def lecturerLogin():
         lecturer = mongo.db.lecturers.find_one({'staff_num': staff_number })
         if lecturer:
             if bcrypt.hashpw(password.encode('utf-8'), lecturer['password']) == lecturer['password']:
+                session.clear()
                 session['role'] = 'lecturer'
                 name = lecturer['name']
                 name = str(name)
